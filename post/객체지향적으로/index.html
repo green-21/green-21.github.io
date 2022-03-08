@@ -3,8 +3,7 @@
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<title>객체지향적으로 - Stagnation</title>
-<meta name=description content="배경 과제로 제출했던 코드 중 하나를 조금 더 객체지향적으로 변경하고 이를 설명하는 것을 주제로 학교 자바 수업의 기발 발표를 한 적이 있다. 과거 엉망인 코드를 짜면서 느꼈던 불편함과 그 당시 클린코드를 읽으면서 코드의 퀄리티와 객체지향에 대한 관심이 많아졌고, 이를 실습해보고 싶어 해당 주제를 선정했다. 비록 코드의 결과물은 만족스럽지 않았지만, 처음 구조를 고민하면서 코딩을 해봤기 때문에 나름 좋은 경험이었다고 생각한다.
+<title>객체지향적으로 - Stagnation</title><meta name=description content="배경 과제로 제출했던 코드 중 하나를 조금 더 객체지향적으로 변경하고 이를 설명하는 것을 주제로 학교 자바 수업의 기발 발표를 한 적이 있다. 과거 엉망인 코드를 짜면서 느꼈던 불편함과 그 당시 클린코드를 읽으면서 코드의 퀄리티와 객체지향에 대한 관심이 많아졌고, 이를 실습해보고 싶어 해당 주제를 선정했다. 비록 코드의 결과물은 만족스럽지 않았지만, 처음 구조를 고민하면서 코딩을 해봤기 때문에 나름 좋은 경험이었다고 생각한다.
 문제 준비한 예제는 명품 자바 에센셜의 5장 실습문제 6번이다.
  💡 [실습문제 6번] 간단한 그래픽 편집기를 만들어보자.">
 <meta name=author content="green-21">
@@ -14,11 +13,11 @@
 <link rel=preload as=image href=https://green-21.github.io/theme.png>
 <link rel=icon href=https://green-21.github.io/favicon.ico>
 <link rel=apple-touch-icon href=https://green-21.github.io/apple-touch-icon.png>
-<meta name=generator content="Hugo 0.92.1">
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','G-85B2L7QDNR','auto'),ga('send','pageview'))</script>
+<meta name=generator content="Hugo 0.93.2">
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","G-85B2L7QDNR","auto"),ga("send","pageview"))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-85B2L7QDNR"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-85B2L7QDNR',{anonymize_ip:!1})}</script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-85B2L7QDNR",{anonymize_ip:!1})}</script>
 <meta property="og:title" content="객체지향적으로">
 <meta property="og:description" content="배경 과제로 제출했던 코드 중 하나를 조금 더 객체지향적으로 변경하고 이를 설명하는 것을 주제로 학교 자바 수업의 기발 발표를 한 적이 있다. 과거 엉망인 코드를 짜면서 느꼈던 불편함과 그 당시 클린코드를 읽으면서 코드의 퀄리티와 객체지향에 대한 관심이 많아졌고, 이를 실습해보고 싶어 해당 주제를 선정했다. 비록 코드의 결과물은 만족스럽지 않았지만, 처음 구조를 고민하면서 코딩을 해봤기 때문에 나름 좋은 경험이었다고 생각한다.
 문제 준비한 예제는 명품 자바 에센셜의 5장 실습문제 6번이다.
@@ -39,31 +38,19 @@
 <meta name=twitter:description content="배경 과제로 제출했던 코드 중 하나를 조금 더 객체지향적으로 변경하고 이를 설명하는 것을 주제로 학교 자바 수업의 기발 발표를 한 적이 있다. 과거 엉망인 코드를 짜면서 느꼈던 불편함과 그 당시 클린코드를 읽으면서 코드의 퀄리티와 객체지향에 대한 관심이 많아졌고, 이를 실습해보고 싶어 해당 주제를 선정했다. 비록 코드의 결과물은 만족스럽지 않았지만, 처음 구조를 고민하면서 코딩을 해봤기 때문에 나름 좋은 경험이었다고 생각한다.
 문제 준비한 예제는 명품 자바 에센셜의 5장 실습문제 6번이다.
  💡 [실습문제 6번] 간단한 그래픽 편집기를 만들어보자.">
-</head>
-<body class=not-ready data-menu=false>
+</head><body class=not-ready data-menu=false>
 <header class=header>
 <p class=logo>
 <a class=site-name href=https://green-21.github.io/>Stagnation</a><a class=btn-dark></a>
-</p>
-<script>let bodyClx=document.body.classList,btnDark=document.querySelector('.btn-dark'),sysDark=window.matchMedia('(prefers-color-scheme: dark)'),darkVal=localStorage.getItem('dark'),setDark=a=>{bodyClx[a?'add':'remove']('dark'),localStorage.setItem('dark',a?'yes':'no')};setDark(darkVal?darkVal==='yes':sysDark.matches),requestAnimationFrame(()=>bodyClx.remove('not-ready')),btnDark.addEventListener('click',()=>setDark(!bodyClx.contains('dark'))),sysDark.addEventListener('change',a=>setDark(a.matches))</script>
-</header>
-<main class=main>
+</p><script>let bodyClx=document.body.classList,btnDark=document.querySelector(".btn-dark"),sysDark=window.matchMedia("(prefers-color-scheme: dark)"),darkVal=localStorage.getItem("dark"),setDark=e=>{bodyClx[e?"add":"remove"]("dark"),localStorage.setItem("dark",e?"yes":"no")};setDark(darkVal?darkVal==="yes":sysDark.matches),requestAnimationFrame(()=>bodyClx.remove("not-ready")),btnDark.addEventListener("click",()=>setDark(!bodyClx.contains("dark"))),sysDark.addEventListener("change",e=>setDark(e.matches))</script>
+</header><main class=main>
 <article class=post-single>
 <header class=post-title>
 <p>
 <time>Jan 29, 2022</time>
 <span>green-21</span>
-</p>
-<h1>객체지향적으로</h1>
-</header>
-<section class=post-content><h2 id=배경>배경</h2>
-<p>과제로 제출했던 코드 중 하나를 조금 더 객체지향적으로 변경하고 이를 설명하는 것을 주제로 학교 자바 수업의 기발 발표를 한 적이 있다. 과거 엉망인 코드를 짜면서 느꼈던 불편함과 그 당시 클린코드를 읽으면서 코드의 퀄리티와 객체지향에 대한 관심이 많아졌고, 이를 실습해보고 싶어 해당 주제를 선정했다. 비록 코드의 결과물은 만족스럽지 않았지만, 처음 구조를 고민하면서 코딩을 해봤기 때문에 나름 좋은 경험이었다고 생각한다.</p>
-<h2 id=문제>문제</h2>
-<p>준비한 예제는 <strong>명품 자바 에센셜의 5장 실습문제 6번</strong>이다.</p>
-<blockquote>
-<p>💡 [실습문제 6번] 간단한 그래픽 편집기를 만들어보자. 본문 5.6절의 메소드 오버라이딩과 5.7절의 추상 클래스의 설명 중에 Line, Rect, Circle 클래스 코드를 활용하여, 다음 실행 결과처럼 동작하는 프로그램을 작성하라.</p>
-</blockquote>
-<pre tabindex=0><code>삽입(1), 삭제(2), 모두보기(3), 종료(4) &gt;&gt; 1
+</p><h1>객체지향적으로</h1></header><section class=post-content><h2 id=배경>배경</h2><p>과제로 제출했던 코드 중 하나를 조금 더 객체지향적으로 변경하고 이를 설명하는 것을 주제로 학교 자바 수업의 기발 발표를 한 적이 있다. 과거 엉망인 코드를 짜면서 느꼈던 불편함과 그 당시 클린코드를 읽으면서 코드의 퀄리티와 객체지향에 대한 관심이 많아졌고, 이를 실습해보고 싶어 해당 주제를 선정했다. 비록 코드의 결과물은 만족스럽지 않았지만, 처음 구조를 고민하면서 코딩을 해봤기 때문에 나름 좋은 경험이었다고 생각한다.</p><h2 id=문제>문제</h2><p>준비한 예제는 <strong>명품 자바 에센셜의 5장 실습문제 6번</strong>이다.</p><blockquote>
+<p>💡 [실습문제 6번] 간단한 그래픽 편집기를 만들어보자. 본문 5.6절의 메소드 오버라이딩과 5.7절의 추상 클래스의 설명 중에 Line, Rect, Circle 클래스 코드를 활용하여, 다음 실행 결과처럼 동작하는 프로그램을 작성하라.</p></blockquote><pre tabindex=0><code>삽입(1), 삭제(2), 모두보기(3), 종료(4) &gt;&gt; 1
 도형 종류 LINE(1), RECT(2), CIRCLE(3) &gt;&gt; 1
 삽입(1), 삭제(2), 모두보기(3), 종료(4) &gt;&gt; 1
 도형 종류 LINE(1), RECT(2), CIRCLE(3) &gt;&gt; 3
@@ -75,320 +62,245 @@ Circle
 삭제할 수 없습니다.
 삽입(1), 삭제(2), 모두보기(3), 종료(4) &gt;&gt; 4
 프로그램을 종료합니다...
-</code></pre><p>사실 객체지향을 설명하는 단원의 문제여서, 문제의 요지도 다형성을 구현하는 것이었다. Draw()라는 추상함수를 갖는 추상 클래스 Shape를 Line, Rect, Circle로 구현하고, Shape 객체로 이를 업캐스팅해서 오버라딩된 함수를 호출하는 것을 구현하는 것이 문제의 정답이라고 할 수 있다.</p>
-<h2 id=풀이>풀이</h2>
-<ul>
+</code></pre><p>사실 객체지향을 설명하는 단원의 문제여서, 문제의 요지도 다형성을 구현하는 것이었다. Draw()라는 추상함수를 갖는 추상 클래스 Shape를 Line, Rect, Circle로 구현하고, Shape 객체로 이를 업캐스팅해서 오버라딩된 함수를 호출하는 것을 구현하는 것이 문제의 정답이라고 할 수 있다.</p><h2 id=풀이>풀이</h2><ul>
 <li>
-<p><strong>shape.java</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Shape</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>draw</span><span style=color:#f92672>();</span>
-<span style=color:#f92672>}</span>
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Line</span> <span style=color:#66d9ef>extends</span> Shape <span style=color:#f92672>{</span>
-    <span style=color:#a6e22e>@Override</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>draw</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Line&#34;</span><span style=color:#f92672>);</span>
-    <span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Rect</span> <span style=color:#66d9ef>extends</span> Shape <span style=color:#f92672>{</span>
-    <span style=color:#a6e22e>@Override</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>draw</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Rect&#34;</span><span style=color:#f92672>);</span>
-    <span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Circle</span> <span style=color:#66d9ef>extends</span> Shape <span style=color:#f92672>{</span>
-    <span style=color:#a6e22e>@Override</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>draw</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Circle&#34;</span><span style=color:#f92672>);</span>
-    <span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-</code></pre></div></li>
+<p><strong>shape.java</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Shape</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>draw</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Line</span> <span style=color:#66d9ef>extends</span> Shape <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>draw</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Line&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Rect</span> <span style=color:#66d9ef>extends</span> Shape <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>draw</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Rect&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Circle</span> <span style=color:#66d9ef>extends</span> Shape <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>draw</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Circle&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li><li>
+<p><strong>Main.java</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> java.util.*<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Main</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		var scanner <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Scanner<span style=color:#f92672>(</span>System<span style=color:#f92672>.</span><span style=color:#a6e22e>in</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		var shapes <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Vector<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;();</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> option <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>do</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;삽입(1), 삭제(2), 모두보기(3), 종료(4) &gt;&gt; &#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>			option <span style=color:#f92672>=</span> scanner<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>switch</span><span style=color:#f92672>(</span>option<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 1<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;도형 종류 Line(1), Rect(2), Circle(3) &gt;&gt; &#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>int</span> op2 <span style=color:#f92672>=</span> scanner<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>switch</span><span style=color:#f92672>(</span>op2<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>case</span> 1<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>					shapes<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Line<span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>					<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>case</span> 2<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>					shapes<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Rect<span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>					<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>case</span> 3<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>					shapes<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Circle<span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>					<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>				<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 2<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;삭제할 도형의 위치&gt;&gt; &#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>int</span> index <span style=color:#f92672>=</span> scanner<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>				shapes<span style=color:#f92672>.</span><span style=color:#a6e22e>remove</span><span style=color:#f92672>(</span>index<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 3<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				var itor <span style=color:#f92672>=</span> shapes<span style=color:#f92672>.</span><span style=color:#a6e22e>iterator</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>itor<span style=color:#f92672>.</span><span style=color:#a6e22e>hasNext</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>					var obj <span style=color:#f92672>=</span> itor<span style=color:#f92672>.</span><span style=color:#a6e22e>next</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>					obj<span style=color:#f92672>.</span><span style=color:#a6e22e>draw</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>				<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span> <span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>option <span style=color:#f92672>!=</span> 4<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li><li>
+<p>예외 처리 같은 더 신경써줘야 할 것들이 있지만 일단은 생략했다.</p></li></ul><h2 id=또-다른-문제>또 다른 문제</h2><h3 id=반복되는-동일-구조>반복되는 동일 구조</h3><p>다만, 위 코드는 불편함이 존재한다. 선택지를 구현하는 코드는 동일한 구조가 반복된다. 그러나, 이를 반복해서 작성하고 있다. 즉, DRY하지 않다! 만약 선택지가 늘어난다면 늘어내는대로 선택지를 중첩해서 추가 작성해야 한다. 아마 굉장히 꼴뵈기 힘든 코드가 만들어 질 것이다. 위의 코드도 벌써 도형을 삽입할 때, 2개의 swtich문이 반복해서 나타난다.</p><p><img src=/images/1/1.png alt=공통구조.png></p><h3 id=절차적인-코드>절차적인 코드</h3><p>main 함수에 모든 코드가 담겨 있다는 것이 문제가 될 수도 있다. 클린 코드에 따르면 함수와 클래스는 최대한 작고 하나의 책임만을 가져야 한다고 한다. 그러나 지금 main에서 모든 일을 담당하고 있다. 이를 분리할 필요가 있다.</p><h2 id=객체지향으로>객체지향으로</h2><h3 id=1-vector와-scanner-클래스에-대한-wrapper>1. Vector와 Scanner 클래스에 대한 Wrapper</h3><p><img src=/images/1/2.png alt="외부 코드 감싸기.png"></p><p>클린 코드에서 외부 라이브러리를 사용하게 될 때, 외부 라이브러리의 변화가 미치는 정도를 줄이기 위해서 그 라이브러리의 클래스들을 한 번 감싸 경계를 구분해야 한다고 했다. 그래서, 앞서 사용한 <code>Vector</code>를 감싼 <code>ShapeManager</code>와 <code>Scanner</code>를 감싼 <code>Prompt</code> 클래스를 만든다.</p><ul>
 <li>
-<p><strong>Main.java</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>import</span> java.util.*<span style=color:#f92672>;</span>
-
-<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Main</span> <span style=color:#f92672>{</span>
-	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-		var scanner <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Scanner<span style=color:#f92672>(</span>System<span style=color:#f92672>.</span><span style=color:#a6e22e>in</span><span style=color:#f92672>);</span>
-		var shapes <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Vector<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;();</span>
-		<span style=color:#66d9ef>int</span> option <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>;</span>
-
-		<span style=color:#66d9ef>do</span> <span style=color:#f92672>{</span>
-			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;삽입(1), 삭제(2), 모두보기(3), 종료(4) &gt;&gt; &#34;</span><span style=color:#f92672>);</span>
-			option <span style=color:#f92672>=</span> scanner<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>();</span>
-
-			<span style=color:#66d9ef>switch</span><span style=color:#f92672>(</span>option<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-			<span style=color:#66d9ef>case</span> 1<span style=color:#f92672>:</span>
-				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;도형 종류 Line(1), Rect(2), Circle(3) &gt;&gt; &#34;</span><span style=color:#f92672>);</span>
-				<span style=color:#66d9ef>int</span> op2 <span style=color:#f92672>=</span> scanner<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>();</span>
-
-				<span style=color:#66d9ef>switch</span><span style=color:#f92672>(</span>op2<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-				<span style=color:#66d9ef>case</span> 1<span style=color:#f92672>:</span>
-					shapes<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Line<span style=color:#f92672>());</span>
-					<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
-				<span style=color:#66d9ef>case</span> 2<span style=color:#f92672>:</span>
-					shapes<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Rect<span style=color:#f92672>());</span>
-					<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
-				<span style=color:#66d9ef>case</span> 3<span style=color:#f92672>:</span>
-					shapes<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Circle<span style=color:#f92672>());</span>
-					<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
-				<span style=color:#f92672>}</span>
-				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
-			<span style=color:#66d9ef>case</span> 2<span style=color:#f92672>:</span>
-				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;삭제할 도형의 위치&gt;&gt; &#34;</span><span style=color:#f92672>);</span>
-				<span style=color:#66d9ef>int</span> index <span style=color:#f92672>=</span> scanner<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>();</span>
-				shapes<span style=color:#f92672>.</span><span style=color:#a6e22e>remove</span><span style=color:#f92672>(</span>index<span style=color:#f92672>);</span>
-				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
-			<span style=color:#66d9ef>case</span> 3<span style=color:#f92672>:</span>
-				var itor <span style=color:#f92672>=</span> shapes<span style=color:#f92672>.</span><span style=color:#a6e22e>iterator</span><span style=color:#f92672>();</span>
-				<span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>itor<span style=color:#f92672>.</span><span style=color:#a6e22e>hasNext</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
-					var obj <span style=color:#f92672>=</span> itor<span style=color:#f92672>.</span><span style=color:#a6e22e>next</span><span style=color:#f92672>();</span>
-					obj<span style=color:#f92672>.</span><span style=color:#a6e22e>draw</span><span style=color:#f92672>();</span>
-				<span style=color:#f92672>}</span>
-			<span style=color:#f92672>}</span>
-		<span style=color:#f92672>}</span> <span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>option <span style=color:#f92672>!=</span> 4<span style=color:#f92672>);</span>
-	<span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-
-</code></pre></div></li>
+<p><strong>ShapeManager</strong></p><ul>
+<li>ShapeManager는 특히 일급 컬렉션이라고 하는 것 같은데, 이름이 멋있는 것 치고는 특별한 의미가 있다고 생각하지는 않는다. 다만, 뭔가 조금 더 기능 단위를 확실하게 구분하는 느낌이다. 그 외에는 어떤 데이터 객체에 특별한 이름을 붙인 것이 조금 더 특별하다면 특별하다고 할 수 있을 것 같다.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Iterator<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Vector<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ShapeManager</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    Vector<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> store<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>insert</span><span style=color:#f92672>(</span>Shape s<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        store<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>s<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>delete</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> index<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            store<span style=color:#f92672>.</span><span style=color:#a6e22e>remove</span><span style=color:#f92672>(</span>index<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>ArrayIndexOutOfBoundsException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> 0<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>printAll</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        Iterator<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> iter <span style=color:#f92672>=</span> store<span style=color:#f92672>.</span><span style=color:#a6e22e>iterator</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>iter<span style=color:#f92672>.</span><span style=color:#a6e22e>hasNext</span><span style=color:#f92672>())</span>
+</span></span><span style=display:flex><span>            iter<span style=color:#f92672>.</span><span style=color:#a6e22e>next</span><span style=color:#f92672>().</span><span style=color:#a6e22e>draw</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li><li>
+<p><strong>Prompt</strong></p><ul>
+<li>Prompt의 경우 더 좋은 클래스 이름이 있을 것 같지만 영어 능력의 한계로 Prompt라고 했다.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> java.util.InputMismatchException<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Scanner<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Prompt</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    Scanner scanner<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Prompt</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        scanner <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Scanner<span style=color:#f92672>(</span>System<span style=color:#f92672>.</span><span style=color:#a6e22e>in</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>prompt</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> n<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            n <span style=color:#f92672>=</span> scanner<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span><span style=color:#f92672>(</span>InputMismatchException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            n <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> n<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>close</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        scanner<span style=color:#f92672>.</span><span style=color:#a6e22e>close</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li></ul><p>이렇게 하면, 변경이 존재할 때, 대응하기가 쉬워진다. 해당 클래스만 변경해주면 되니까 말이다. Prompt의 경우 만약 시스템을 cui에서 gui로 변경하거나 유사한 변경사항이 있을 때, 인터페이스만 잘 설계했다면, Prompt만 수정하고 나머지 Prompt를 사용하는 코드는 수정이 거의 필요 없을 것이다. 이를 캡슐화와 정보 은닉의 장점이라고 할 수 있다.</p><h3 id=2-다형성을-이용해-구조-변경하기>2. 다형성을 이용해 구조 변경하기</h3><p><strong>한 선택지 분기마다 하나의 클래스를 작성한다.</strong> 각 클래스는 하나의 추상클래스를 상속 받는다. 이를 <code>**State**</code>이라고 이름 붙였고, 이를 구현하는 클래스의 이름 끝에도 State이라는 단어를 붙였다. 이것 역시 State보다 더 좋은 이름이 있을 거라고 생각하지만, 역시 역량이 부족했다.</p><p>각 클래스가 구현해야하는 것들은 다음과 같다.</p><ol>
+<li>출력 메시지</li><li>해당 분기가 입력을 요구하는지 여부</li><li>분기에서 처리해야할 메인 로직</li></ol><ul>
 <li>
-<p>예외 처리 같은 더 신경써줘야 할 것들이 있지만 일단은 생략했다.</p>
-</li>
-</ul>
-<h2 id=또-다른-문제>또 다른 문제</h2>
-<h3 id=반복되는-동일-구조>반복되는 동일 구조</h3>
-<p>다만, 위 코드는 불편함이 존재한다. 선택지를 구현하는 코드는 동일한 구조가 반복된다. 그러나, 이를 반복해서 작성하고 있다. 즉, DRY하지 않다! 만약 선택지가 늘어난다면 늘어내는대로 선택지를 중첩해서 추가 작성해야 한다. 아마 굉장히 꼴뵈기 힘든 코드가 만들어 질 것이다. 위의 코드도 벌써 도형을 삽입할 때, 2개의 swtich문이 반복해서 나타난다.</p>
-<p><img src=/images/1/1.png alt=공통구조.png></p>
-<h3 id=절차적인-코드>절차적인 코드</h3>
-<p>main 함수에 모든 코드가 담겨 있다는 것이 문제가 될 수도 있다. 클린 코드에 따르면 함수와 클래스는 최대한 작고 하나의 책임만을 가져야 한다고 한다. 그러나 지금 main에서 모든 일을 담당하고 있다. 이를 분리할 필요가 있다.</p>
-<h2 id=객체지향으로>객체지향으로</h2>
-<h3 id=1-vector와-scanner-클래스에-대한-wrapper>1. Vector와 Scanner 클래스에 대한 Wrapper</h3>
-<p><img src=/images/1/2.png alt="외부 코드 감싸기.png"></p>
-<p>클린 코드에서 외부 라이브러리를 사용하게 될 때, 외부 라이브러리의 변화가 미치는 정도를 줄이기 위해서 그 라이브러리의 클래스들을 한 번 감싸 경계를 구분해야 한다고 했다. 그래서, 앞서 사용한 <code>Vector</code>를 감싼 <code>ShapeManager</code>와 <code>Scanner</code>를 감싼 <code>Prompt</code> 클래스를 만든다.</p>
-<ul>
+<p><strong>State</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>State</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>boolean</span> prompt<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>State</span><span style=color:#f92672>(</span><span style=color:#66d9ef>boolean</span> prompt<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>prompt</span> <span style=color:#f92672>=</span> prompt<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isNeedPrompt</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> prompt<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>printMsg</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> State <span style=color:#a6e22e>process</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> input<span style=color:#f92672>,</span> ShapeManager sm<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li><li>
+<p><strong>MainState</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MainState</span> <span style=color:#66d9ef>extends</span> State <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>MainState</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>printMsg</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;삽입(1), 삭제(2), 모두 보기(3), 종료(4)&#34;</span><span style=color:#f92672>);</span>  
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> State <span style=color:#a6e22e>process</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> input<span style=color:#f92672>,</span> ShapeManager sm<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>switch</span><span style=color:#f92672>(</span>input<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>case</span> 1<span style=color:#f92672>:</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> InsertState<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>case</span> 2<span style=color:#f92672>:</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> DeleteState<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>case</span> 3<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>            sm<span style=color:#f92672>.</span><span style=color:#a6e22e>printAll</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>case</span> 4<span style=color:#f92672>:</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>default</span> <span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>            System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;잘못된 선택지입니다. 다시 선택해주세요.&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li><li>
+<p><strong>InsertState</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>InsertState</span> <span style=color:#66d9ef>extends</span> State <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>InsertState</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>printMsg</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;도형 종류 Line(1), Rect(2), Circle(3) &gt;&gt;&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> State <span style=color:#a6e22e>process</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> input<span style=color:#f92672>,</span> ShapeManager sm<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>switch</span><span style=color:#f92672>(</span>input<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>case</span> 1<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>            sm<span style=color:#f92672>.</span><span style=color:#a6e22e>insert</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Line<span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>case</span> 2<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>            sm<span style=color:#f92672>.</span><span style=color:#a6e22e>insert</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Rect<span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>case</span> 3<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>            sm<span style=color:#f92672>.</span><span style=color:#a6e22e>insert</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Circle<span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>default</span> <span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>            System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;잘못된 선택지입니다. 다시선택하세요.&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> MainState<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li><li>
+<p><strong>DeleteState</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DeleteState</span> <span style=color:#66d9ef>extends</span> State <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>DeleteState</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>printMsg</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;삭제할 도형의 위치 &gt;&gt;&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> State <span style=color:#a6e22e>process</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> input<span style=color:#f92672>,</span> ShapeManager sm<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(!</span>sm<span style=color:#f92672>.</span><span style=color:#a6e22e>delete</span><span style=color:#f92672>(</span>input<span style=color:#f92672>))</span>
+</span></span><span style=display:flex><span>            System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;삭제할 수 없습니다.&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> MainState<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li></ul><p>이제 선택지가 더 필요한 경우에는 State 클래스를 하나 더 만들고, 다른 클래스와 연관시키기만 하면 된다. 다만, 개선사항이 있다면, 해당 구조는 클래스간 연관관계를 잘 살펴봐야 한다는 것이다. 그리고 본질적으로 스위치를 없애고 싶었지만 그러지 못했다.</p><h3 id=3-main에서-조립>3. main에서 조립</h3><ul>
 <li>
-<p><strong>ShapeManager</strong></p>
-<ul>
-<li>ShapeManager는 특히 일급 컬렉션이라고 하는 것 같은데, 이름이 멋있는 것 치고는 특별한 의미가 있다고 생각하지는 않는다. 다만, 뭔가 조금 더 기능 단위를 확실하게 구분하는 느낌이다. 그 외에는 어떤 데이터 객체에 특별한 이름을 붙인 것이 조금 더 특별하다면 특별하다고 할 수 있을 것 같다.</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>import</span> java.util.Iterator<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> java.util.Vector<span style=color:#f92672>;</span>
-
-<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ShapeManager</span> <span style=color:#f92672>{</span>
-    Vector<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> store<span style=color:#f92672>;</span>
-
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>insert</span><span style=color:#f92672>(</span>Shape s<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-        store<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>s<span style=color:#f92672>);</span>
-    <span style=color:#f92672>}</span>
-
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>delete</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> index<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
-            store<span style=color:#f92672>.</span><span style=color:#a6e22e>remove</span><span style=color:#f92672>(</span>index<span style=color:#f92672>);</span>
-        <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>ArrayIndexOutOfBoundsException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-            <span style=color:#66d9ef>return</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>;</span>
-        <span style=color:#f92672>}</span>
-        <span style=color:#66d9ef>return</span> 0<span style=color:#f92672>;</span>
-    <span style=color:#f92672>}</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>printAll</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        Iterator<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> iter <span style=color:#f92672>=</span> store<span style=color:#f92672>.</span><span style=color:#a6e22e>iterator</span><span style=color:#f92672>();</span>
-        <span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>iter<span style=color:#f92672>.</span><span style=color:#a6e22e>hasNext</span><span style=color:#f92672>())</span>
-            iter<span style=color:#f92672>.</span><span style=color:#a6e22e>next</span><span style=color:#f92672>().</span><span style=color:#a6e22e>draw</span><span style=color:#f92672>();</span>
-    <span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-</code></pre></div></li>
-<li>
-<p><strong>Prompt</strong></p>
-<ul>
-<li>Prompt의 경우 더 좋은 클래스 이름이 있을 것 같지만 영어 능력의 한계로 Prompt라고 했다.</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>import</span> java.util.InputMismatchException<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> java.util.Scanner<span style=color:#f92672>;</span>
-
-<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Prompt</span> <span style=color:#f92672>{</span>
-    Scanner scanner<span style=color:#f92672>;</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Prompt</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        scanner <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Scanner<span style=color:#f92672>(</span>System<span style=color:#f92672>.</span><span style=color:#a6e22e>in</span><span style=color:#f92672>);</span>
-    <span style=color:#f92672>}</span>
-    
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>prompt</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>int</span> n<span style=color:#f92672>;</span>
-        <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
-            n <span style=color:#f92672>=</span> scanner<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>();</span>
-        <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span><span style=color:#f92672>(</span>InputMismatchException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-            n <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>;</span>
-        <span style=color:#f92672>}</span>
-        <span style=color:#66d9ef>return</span> n<span style=color:#f92672>;</span>
-    <span style=color:#f92672>}</span>
-    
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>close</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        scanner<span style=color:#f92672>.</span><span style=color:#a6e22e>close</span><span style=color:#f92672>();</span>
-    <span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-</code></pre></div></li>
-</ul>
-<p>이렇게 하면, 변경이 존재할 때, 대응하기가 쉬워진다. 해당 클래스만 변경해주면 되니까 말이다. Prompt의 경우 만약 시스템을 cui에서 gui로 변경하거나 유사한 변경사항이 있을 때, 인터페이스만 잘 설계했다면, Prompt만 수정하고 나머지 Prompt를 사용하는 코드는 수정이 거의 필요 없을 것이다. 이를 캡슐화와 정보 은닉의 장점이라고 할 수 있다.</p>
-<h3 id=2-다형성을-이용해-구조-변경하기>2. 다형성을 이용해 구조 변경하기</h3>
-<p><strong>한 선택지 분기마다 하나의 클래스를 작성한다.</strong> 각 클래스는 하나의 추상클래스를 상속 받는다. 이를 <code>**State**</code>이라고 이름 붙였고, 이를 구현하는 클래스의 이름 끝에도 State이라는 단어를 붙였다. 이것 역시 State보다 더 좋은 이름이 있을 거라고 생각하지만, 역시 역량이 부족했다.</p>
-<p>각 클래스가 구현해야하는 것들은 다음과 같다.</p>
-<ol>
-<li>출력 메시지</li>
-<li>해당 분기가 입력을 요구하는지 여부</li>
-<li>분기에서 처리해야할 메인 로직</li>
-</ol>
-<ul>
-<li>
-<p><strong>State</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>State</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>boolean</span> prompt<span style=color:#f92672>;</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>State</span><span style=color:#f92672>(</span><span style=color:#66d9ef>boolean</span> prompt<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>prompt</span> <span style=color:#f92672>=</span> prompt<span style=color:#f92672>;</span>
-    <span style=color:#f92672>}</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isNeedPrompt</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>return</span> prompt<span style=color:#f92672>;</span>
-    <span style=color:#f92672>}</span>
-    
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>printMsg</span><span style=color:#f92672>();</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> State <span style=color:#a6e22e>process</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> input<span style=color:#f92672>,</span> ShapeManager sm<span style=color:#f92672>);</span>
-<span style=color:#f92672>}</span>
-</code></pre></div></li>
-<li>
-<p><strong>MainState</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MainState</span> <span style=color:#66d9ef>extends</span> State <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>MainState</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>super</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
-    <span style=color:#f92672>}</span>
-
-    <span style=color:#a6e22e>@Override</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>printMsg</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;삽입(1), 삭제(2), 모두 보기(3), 종료(4)&#34;</span><span style=color:#f92672>);</span>  
-    <span style=color:#f92672>}</span>
-
-    <span style=color:#a6e22e>@Override</span>
-    <span style=color:#66d9ef>public</span> State <span style=color:#a6e22e>process</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> input<span style=color:#f92672>,</span> ShapeManager sm<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>switch</span><span style=color:#f92672>(</span>input<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>case</span> 1<span style=color:#f92672>:</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> InsertState<span style=color:#f92672>();</span>
-        <span style=color:#66d9ef>case</span> 2<span style=color:#f92672>:</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> DeleteState<span style=color:#f92672>();</span>
-        <span style=color:#66d9ef>case</span> 3<span style=color:#f92672>:</span>
-            sm<span style=color:#f92672>.</span><span style=color:#a6e22e>printAll</span><span style=color:#f92672>();</span>
-            <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
-        <span style=color:#66d9ef>case</span> 4<span style=color:#f92672>:</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
-        <span style=color:#66d9ef>default</span> <span style=color:#f92672>:</span>
-            System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;잘못된 선택지입니다. 다시 선택해주세요.&#34;</span><span style=color:#f92672>);</span>
-        <span style=color:#f92672>}</span>
-        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>;</span>
-    <span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-</code></pre></div></li>
-<li>
-<p><strong>InsertState</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>InsertState</span> <span style=color:#66d9ef>extends</span> State <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>InsertState</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>super</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
-    <span style=color:#f92672>}</span>
-    <span style=color:#a6e22e>@Override</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>printMsg</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;도형 종류 Line(1), Rect(2), Circle(3) &gt;&gt;&#34;</span><span style=color:#f92672>);</span>
-    <span style=color:#f92672>}</span>
-    <span style=color:#a6e22e>@Override</span>
-    <span style=color:#66d9ef>public</span> State <span style=color:#a6e22e>process</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> input<span style=color:#f92672>,</span> ShapeManager sm<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>switch</span><span style=color:#f92672>(</span>input<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>case</span> 1<span style=color:#f92672>:</span>
-            sm<span style=color:#f92672>.</span><span style=color:#a6e22e>insert</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Line<span style=color:#f92672>());</span>
-            <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
-        <span style=color:#66d9ef>case</span> 2<span style=color:#f92672>:</span>
-            sm<span style=color:#f92672>.</span><span style=color:#a6e22e>insert</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Rect<span style=color:#f92672>());</span>
-            <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
-        <span style=color:#66d9ef>case</span> 3<span style=color:#f92672>:</span>
-            sm<span style=color:#f92672>.</span><span style=color:#a6e22e>insert</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Circle<span style=color:#f92672>());</span>
-            <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
-        <span style=color:#66d9ef>default</span> <span style=color:#f92672>:</span>
-            System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;잘못된 선택지입니다. 다시선택하세요.&#34;</span><span style=color:#f92672>);</span>
-            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>;</span>
-        <span style=color:#f92672>}</span>
-        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> MainState<span style=color:#f92672>();</span>
-    <span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-</code></pre></div></li>
-<li>
-<p><strong>DeleteState</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DeleteState</span> <span style=color:#66d9ef>extends</span> State <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>DeleteState</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>super</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
-    <span style=color:#f92672>}</span>
-
-    <span style=color:#a6e22e>@Override</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>printMsg</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;삭제할 도형의 위치 &gt;&gt;&#34;</span><span style=color:#f92672>);</span>
-    <span style=color:#f92672>}</span>
-
-    <span style=color:#a6e22e>@Override</span>
-    <span style=color:#66d9ef>public</span> State <span style=color:#a6e22e>process</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> input<span style=color:#f92672>,</span> ShapeManager sm<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-        <span style=color:#66d9ef>if</span><span style=color:#f92672>(!</span>sm<span style=color:#f92672>.</span><span style=color:#a6e22e>delete</span><span style=color:#f92672>(</span>input<span style=color:#f92672>))</span>
-            System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;삭제할 수 없습니다.&#34;</span><span style=color:#f92672>);</span>
-        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> MainState<span style=color:#f92672>();</span>
-    <span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-</code></pre></div></li>
-</ul>
-<p>이제 선택지가 더 필요한 경우에는 State 클래스를 하나 더 만들고, 다른 클래스와 연관시키기만 하면 된다. 다만, 개선사항이 있다면, 해당 구조는 클래스간 연관관계를 잘 살펴봐야 한다는 것이다. 그리고 본질적으로 스위치를 없애고 싶었지만 그러지 못했다.</p>
-<h3 id=3-main에서-조립>3. main에서 조립</h3>
-<ul>
-<li>
-<p><strong>GraphicEditor - Main</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GraphicEditor</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-        Prompt prompt <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Prompt<span style=color:#f92672>();</span>
-        ShapeManager shapes <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ShapeManager<span style=color:#f92672>();</span>
-        State state <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> MainState<span style=color:#f92672>();</span>
-        
-        <span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>state <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-            <span style=color:#66d9ef>int</span> inputValue <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>;</span>
-            state<span style=color:#f92672>.</span><span style=color:#a6e22e>printMsg</span><span style=color:#f92672>();</span>
-            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>state<span style=color:#f92672>.</span><span style=color:#a6e22e>isNeedPrompt</span><span style=color:#f92672>())</span> inputValue <span style=color:#f92672>=</span> prompt<span style=color:#f92672>.</span><span style=color:#a6e22e>prompt</span><span style=color:#f92672>();</span>
-            var nextState <span style=color:#f92672>=</span> state<span style=color:#f92672>.</span><span style=color:#a6e22e>process</span><span style=color:#f92672>(</span>inputValue<span style=color:#f92672>,</span> shapes<span style=color:#f92672>);</span>
-            state <span style=color:#f92672>=</span> nextState<span style=color:#f92672>;</span>
-        <span style=color:#f92672>}</span>
-        
-        prompt<span style=color:#f92672>.</span><span style=color:#a6e22e>close</span><span style=color:#f92672>();</span>
-    <span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-</code></pre></div></li>
-<li>
-<p>main에서는 작성했던 클래스들을 조립했다.</p>
-</li>
-<li>
-<p>정확하게 메인 루프에는 선택 안내 메시지 출력(<code>printMsg()</code>) → 선택지 입력(<code>prompt()</code>) → 선택지에 따른 행동(<code>process()</code>)이라는 한가지 구조만 눈에 보인다. 다형성을 이용해서 동일한 구조에서 다른 행동을 할 수 있게 되었다.</p>
-</li>
-<li>
-<p>다른 선택지를 추가해야할 때에는 클래스를 작성하면 된다.</p>
-</li>
-</ul>
-<h3 id=4-클래스-다이어그램>4. 클래스 다이어그램</h3>
-<p><img src=/images/1/3.png alt=클래스다이어그램.png></p>
-<p>코드들을 정리해서 다이어그램으로 나타냈다. 다이어그램은 파워포인트로 작성했는데, 표현의 한계가 있을 수도 있고, 다이어그램 작성을 처음 해본 탓에 오류가 있을 수도 있다.</p>
-<h2 id=더-개선할-수-있을까>더 개선할 수 있을까?</h2>
-<h3 id=switch-줄이기>switch 줄이기</h3>
-<p>사실 처음 고민 했을 때에는 switch문 자체를 줄이고 싶었다. 지금 당장 생각나는 방법은 메소드 레퍼런스를 배열로 관리하는 것이라고 생각한다.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>int</span> input <span style=color:#f92672>=</span> <span style=color:#f92672>...;</span> <span style=color:#75715e>// 입력 받고, 입력값 검증하는 단계
-</span><span style=color:#75715e></span>method<span style=color:#f92672>[</span>input<span style=color:#f92672>]();.</span> <span style=color:#75715e>// method는 State이 관리
-</span></code></pre></div><p>C#에서는 delegate를 통해서 가능할 것 같다는 생각이 드는데, 자바에서는 그런게 있는가 모르겠다. 이게 함수형 프로그래밍 기법 중 일종이라고 알고 있는데, 아마 자바도 지원하지 않을까 생각한다.</p>
-<h3 id=복잡해진-구조>복잡해진 구조</h3>
-<p>클래스를 추가로 더 만들고, 코드를 여러 클래스로 분리하다 보니까 초기 해답보다 복잡해지고, 코드가 조금 더 길어진 감은 있다. 객체지향이 갖는 어쩔 수 없는 점이라고 생각하지만, 더 좋은 구조가 있겠다는 생각이 든다. 경험이나 지식이 좀 부족하다.</p>
-</section>
-<footer class=post-tags>
+<p><strong>GraphicEditor - Main</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GraphicEditor</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        Prompt prompt <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Prompt<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        ShapeManager shapes <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ShapeManager<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        State state <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> MainState<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>state <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> inputValue <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            state<span style=color:#f92672>.</span><span style=color:#a6e22e>printMsg</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>state<span style=color:#f92672>.</span><span style=color:#a6e22e>isNeedPrompt</span><span style=color:#f92672>())</span> inputValue <span style=color:#f92672>=</span> prompt<span style=color:#f92672>.</span><span style=color:#a6e22e>prompt</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>            var nextState <span style=color:#f92672>=</span> state<span style=color:#f92672>.</span><span style=color:#a6e22e>process</span><span style=color:#f92672>(</span>inputValue<span style=color:#f92672>,</span> shapes<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            state <span style=color:#f92672>=</span> nextState<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        prompt<span style=color:#f92672>.</span><span style=color:#a6e22e>close</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li><li>
+<p>main에서는 작성했던 클래스들을 조립했다.</p></li><li>
+<p>정확하게 메인 루프에는 선택 안내 메시지 출력(<code>printMsg()</code>) → 선택지 입력(<code>prompt()</code>) → 선택지에 따른 행동(<code>process()</code>)이라는 한가지 구조만 눈에 보인다. 다형성을 이용해서 동일한 구조에서 다른 행동을 할 수 있게 되었다.</p></li><li>
+<p>다른 선택지를 추가해야할 때에는 클래스를 작성하면 된다.</p></li></ul><h3 id=4-클래스-다이어그램>4. 클래스 다이어그램</h3><p><img src=/images/1/3.png alt=클래스다이어그램.png></p><p>코드들을 정리해서 다이어그램으로 나타냈다. 다이어그램은 파워포인트로 작성했는데, 표현의 한계가 있을 수도 있고, 다이어그램 작성을 처음 해본 탓에 오류가 있을 수도 있다.</p><h2 id=더-개선할-수-있을까>더 개선할 수 있을까?</h2><h3 id=switch-줄이기>switch 줄이기</h3><p>사실 처음 고민 했을 때에는 switch문 자체를 줄이고 싶었다. 지금 당장 생각나는 방법은 메소드 레퍼런스를 배열로 관리하는 것이라고 생각한다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>int</span> input <span style=color:#f92672>=</span> <span style=color:#f92672>...;</span> <span style=color:#75715e>// 입력 받고, 입력값 검증하는 단계
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>method<span style=color:#f92672>[</span>input<span style=color:#f92672>]();.</span> <span style=color:#75715e>// method는 State이 관리
+</span></span></span></code></pre></div><p>C#에서는 delegate를 통해서 가능할 것 같다는 생각이 드는데, 자바에서는 그런게 있는가 모르겠다. 이게 함수형 프로그래밍 기법 중 일종이라고 알고 있는데, 아마 자바도 지원하지 않을까 생각한다.</p><h3 id=복잡해진-구조>복잡해진 구조</h3><p>클래스를 추가로 더 만들고, 코드를 여러 클래스로 분리하다 보니까 초기 해답보다 복잡해지고, 코드가 조금 더 길어진 감은 있다. 객체지향이 갖는 어쩔 수 없는 점이라고 생각하지만, 더 좋은 구조가 있겠다는 생각이 든다. 경험이나 지식이 좀 부족하다.</p></section><footer class=post-tags>
 <a href=https://green-21.github.io/tags/java>java</a>
 <a href=https://green-21.github.io/tags/oop>oop</a>
 <a href=https://green-21.github.io/tags/structure>structure</a>
-</footer>
-<br>
+</footer><br>
 <script src=https://utteranc.es/client.js repo=green-21/green-21.github.io issue-term=title theme=preferred-color-scheme crossorigin=anonymous async></script>
-</article>
-</main>
-<footer class=footer>
-<p>&copy; 2022 <a href=https://green-21.github.io/>Stagnation</a></p>
-<p>Powered by <a href=https://gohugo.io/ rel=noopener target=_blank>Hugo️️</a>️</p>
-<p>
+</article></main><footer class=footer>
+<p>&copy; 2022 <a href=https://green-21.github.io/>Stagnation</a></p><p>Powered by <a href=https://gohugo.io/ rel=noopener target=_blank>Hugo️️</a>️</p><p>
 <a href=https://github.com/nanxiaobei/hugo-paper rel=noopener target=_blank>Paper 5.1</a>
-</p>
-</footer>
-</body>
-</html>
+</p></footer></body></html>
