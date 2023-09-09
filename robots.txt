@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://green-21.github.io/sitemap.xml
