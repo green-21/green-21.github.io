@@ -31,8 +31,8 @@
 </span></span><span style=display:flex><span><span style=color:#75715e>// 6. move
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>deque<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> q6(move(q5));			<span style=color:#75715e>// 1 2 3 4 5
 </span></span></span></code></pre></div><br><h3 id=접근>접근<a hidden class=anchor aria-hidden=true href=#접근>#</a></h3><p>&nbsp;&nbsp;
-<code>front()</code>와 <code>back()</code>을 통해서 양쪽 끝단에 있는 요소의 레퍼런스를 얻을 수 있다. 또, 원하는 인덱스의 요소를 <code>at()</code> 또는 <code>[] 연산자</code>로 레퍼런스를 얻을 수 있다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
-</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;deque&gt;</span><span style=color:#75715e>
+<code>front()</code>와 <code>back()</code>을 통해서 양쪽 끝단에 있는 요소의 레퍼런스를 얻을 수 있다. 또, 원하는 인덱스의 요소를 <code>at()</code> 또는 <code>[] 연산자</code>로 레퍼런스를 얻을 수 있다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#75715e>#include&lt;iostream&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include&lt;deque&gt;
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
 </span></span><span style=display:flex><span>
@@ -91,8 +91,8 @@ random access 시에 O(1)을 보장하기 위해 사용할 수 있는 방법은 
 msvc++에서는 <strong>block의 포인터를 저장하기 위한 배열 포인터와 front가 속한 block이 저장된 인덱스, 요소의 개수</strong>만을 가지고 map을 구현한다. 최초 삽입시 맵의 크기는 8로 고정되어 있으며, 블록이 8개가 넘어가면 2씩 곱하면서 크기를 새로 할당한다. (8 -> 16 -> 32 ..)</p><p>&nbsp;&nbsp;
 최초 block은 0번 인덱스에 저장된다. 만약, 최초 block이 꽉 찼고, push_back()연산이 일어난다면, 새로 만들어지는 블록은 1번 인덱스에 삽입된다. 만약 push_front()연산을 수행해야 한다면, 배열의 마지막 위치인 7번에 새로운 블록을 생성하고, 블록의 끝 인덱스인 7*4+4인 32를 가리키는 31번 인덱스를 offset으로 설정한다. 즉, 선형 배열을 시작과 끝이 연결된 원형처럼 사용하는 것이다.<figure><img loading=lazy src=7.png#cener></figure><br>&nbsp;&nbsp;
 추가적으로 back에 새로운 block이 필요하면 2번에 저장하고, 새로운 front 블록이 필요하다면 6번 위치에 block에 새로 추가하고, offset을 변경한다.<figure><img loading=lazy src=8.png#center></figure><br>&nbsp;&nbsp;
-삽입이 지속되어서 9번째 block이 생성되어야할 때, 새로 2배인 크기가 16인 배열 포인터를 할당하고, 기존 map에서 offset 부터 offset index를 유지하면서 복사한다.<figure><img loading=lazy src=9.png#center></figure><br>이를 코드로 구현하면 아래와 같다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;cassert&gt;</span><span style=color:#75715e>
-</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;memory&gt;</span><span style=color:#75715e>
+삽입이 지속되어서 9번째 block이 생성되어야할 때, 새로 2배인 크기가 16인 배열 포인터를 할당하고, 기존 map에서 offset 부터 offset index를 유지하면서 복사한다.<figure><img loading=lazy src=9.png#center></figure><br>이를 코드로 구현하면 아래와 같다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#75715e>#include&lt;cassert&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include&lt;memory&gt;
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>
 </span></span><span style=display:flex><span><span style=color:#75715e>// int형 전용 Deque
 </span></span></span><span style=display:flex><span><span style=color:#75715e>// 연산은 대부분 msvc++ std::deque의 연산을 그대로 가져오려고 했음
